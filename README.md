@@ -6,7 +6,7 @@ But sometimes you really do want a desktop app.  Perhaps you want your software 
 
 Can we have it both ways?  Write a web application that you can deploy with ease?  And have a “wrapper” to make it distributable as a desktop app?
 
-This was what I set out to accomplish for a Java-based software system that we’re developing in my lab.  I wanted to build a web app in Java that I could package as a WAR file for deployment via a web application server like Apache Tomcat.  Then I wanted to package the exact same WAR file that I could deploy with Tomcat as a desktop app which—to the user—didn’t look like a web app at all.  In essence, I wanted the same end result you get with Electron for Node.js applications: I wanted to use web-technologies to build a desktop app that had the look and feel of a traditional desktop application.
+This was what I set out to accomplish for a Java-based software system that we’re developing [in my lab](http://vaclab.web.unc.edu/).  I wanted to build a web app in Java that I could package as a [WAR file](https://en.wikipedia.org/wiki/WAR_(file_format)) for deployment via a web application server like Apache Tomcat.  Then I wanted to package the exact same WAR file that I could deploy with Tomcat as a desktop app which—to the user—didn’t look like a web app at all.  In essence, I wanted the same end result you get with [Electron for Node.js applications](https://electron.atom.io/): I wanted to use web-technologies to build a desktop app that had the look and feel of a traditional desktop application.
 
 I’ve tried this a few times over the years and never found a simple, straight-forward solution.  Until today.  Here are my step-by-step instructions in case there is anyone else out there is looking to solve the same problem.
 
