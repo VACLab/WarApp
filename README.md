@@ -12,17 +12,17 @@ I’ve tried this a few times over the years and never found a simple, straight-
 
 ## Step One: Build Your Web Application
 
-The first step is to build your web application and package it as a WAR file.  The good news is that you don’t need to do anything special for this step.  You can build it for the web, deploy it with Tomcat, debug it in your web browser.  All the same steps you’d normally take for a traditional Java-based web application.
+The first step is to build your web application and package it as a WAR file.  The good news is that __**you don’t need to do anything special**__ for this step.  You can build it for the web, deploy it with Tomcat, debug it in your web browser.  All the same steps you’d normally take for a traditional Java-based web application.
 
 ## Step Two: Get the Tomcat webapp-runner Library
 
-To begin creating your desktop app, next want to download the webapp-runner library created by John Simone. You should grab it as a jar, which I downloaded directly from the Maven website.
+To begin creating your desktop app, next want to download the [webapp-runner library](https://github.com/jsimone/webapp-runner) created by John Simone. You should grab it as a jar, which I [downloaded directly from the Maven website](https://search.maven.org/#search%7Cga%7C1%7Ca%3A%22webapp-runner%22).
 
 The webapp-running jar is designed to let you launch Tomcat with a specific WAR file from the command line, without having to install Tomcat first. This is useful on its own, but it’s really a critical part of running your WAR file into a desktop app.
 
 ## Step Three: Get JxBrowser
 
-Next you’ll need a Java UI component that can run a modern web browser.  The best option seems to be JxBrowser, though it costs money to license.  You can try it free for 30 days to see if it meets your needs. Better yet, if you are working on an Open Source or Academic project (that’s me!) you can apply for a free license.
+Next you’ll need a Java UI component that can run a modern web browser.  [The best option seems to be JxBrowser](https://www.teamdev.com/jxbrowser), though it costs money to license.  You can try it free for 30 days to see if it meets your needs. Better yet, if you are working on an Open Source or Academic project (that’s me!) [you can apply for a free license](https://www.teamdev.com/jxbrowser#evaluate).
 
 There are other options, but many seem to use older versions of webkit or have some other limitations.  JxBrowser is modern, and easy to use.  You’ll see below that the code required to get things up and running is quite simple and short.
 
@@ -32,18 +32,20 @@ Believe it or not, we’re almost done.  The next step is to code up a very smal
 
 I created a new Java project in my IDE, then created a subdirectory called “war” into which I copied the WAR file I created in step one.  Then I created a subdirectory called “lib” in which I placed the JxBrowser and webapp-runner jars.
 
-Finally, I created a new Java class which I've placed in this github repo: WarApp.java.  You'll see that it's pretty simple.  Just one big main() method within which there are four high-level steps.
+Finally, I created a new Java class which I've placed in this github repo: [WarApp.java](https://github.com/VACLab/WarApp/blob/master/WarApp.java).  You'll see that it's pretty simple.  Just one big main() method within which there are four high-level steps.
 
-First, the war file is launched on a locally-running server using exec.
-Second, a Swing-based Java desktop application is created with just a single JxBrowser as the only UI component.
-Third, a listener is added to the Java application to detect when the program is closed.  In that callback (which only gets called when the app is closed), the locally-running Tomcat server is terminated.
-The fourth and final step is to point the browser to the local web server you just started and make the parent Swing frame visible to the user.
-Of course, the code above has a hardcoded port and WAR file.  You could make those configurable if you wish.  For example, they could be put into a configuration file to make this a truly generic “wrapper” that could be applied to any WAR file.
+The code has just a few key steps:
+1. The war file is launched on a locally-running server using exec.
+2. A Swing-based Java desktop application is created with just a single JxBrowser as the only UI component.
+3. A listener is added to the Java application to detect when the program is closed.  In that callback (which only gets called when the app is closed), the locally-running Tomcat server is terminated.
+4. The final step is to point the browser to the local web server you just started and make the parent Swing frame visible to the user.
+
+The port and WAR filename are hardcoded as local variables in the main method.  You could, if you wanted to make the code more configurable, put these values into a configuration file.  That would make this a truly generic “wrapper” that could be re-used for any WAR file without rebuilding.
 
 ## Step Five: Bundle the Java Application for Your Operating System
 
-Your software will run locally after step 4.  However, it will feel like a Java application, not a native app.  To get over this last hurdle, you can use the Oracle Appbundler.  I followed these instructions to build a native-looking OS X app for my Macbook Pro.  It sits on the Dock, has its own icon, and come bundled with its own JRE so it runs even on laptops without Java installed.
+Your software will run locally after step 4.  However, it will feel like a Java application, not a native app.  To get over this last hurdle, you can use the Oracle Appbundler.  [I followed these instructions](http://docs.oracle.com/javase/7/docs/technotes/guides/jweb/packagingAppsForMac.html) to build a native-looking OS X app for my Macbook Pro.  It sits on the Dock, has its own icon, and come bundled with its own JRE so it runs even on laptops without Java installed.
 
 ## Conclusion
 
-These steps have worked for me, but I don’t make any guarantees.  The best part, in my mind, is the relative simplicity of this approach (just a single main method to code!).  Moreover, it’s 100% compatible with the typical WAR file I’d use to deploy my app on a hosted server.  That means I can develop the software once, and deploy both online and as a desktop app.  Code doesn’t get more reusable than that!
+These steps have worked for me, but I don’t make any guarantees.  The best part, in my mind, is the relative simplicity of this approach (just a single main method to code).  Moreover, it’s 100% compatible with the typical WAR file I’d use to deploy my app on a hosted server.  That means I can develop the software once, and deploy both online and as a desktop app.  Code doesn’t get more reusable than that!
